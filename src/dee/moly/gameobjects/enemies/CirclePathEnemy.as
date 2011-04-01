@@ -1,7 +1,6 @@
-﻿package dee.moly.gameobjects.enemies {
-	
+﻿package dee.moly.gameobjects.enemies
+{	
 	import flash.display.BitmapData;
-	import flash.geom.Matrix;
 	import flash.geom.Point;
 	
 	/**
@@ -9,11 +8,9 @@
 	 * @author moly
 	 */
 	
-	public final class CirclePathEnemy extends Enemy{
-		
+	public final class CirclePathEnemy extends Enemy
+	{	
 		private static const SPEED:int = 5;
-		
-		private var matrix:Matrix;
 		
 		private var a:Number;
 		
@@ -21,32 +18,29 @@
 		
 		private var centre:Point;
 		
-		public function CirclePathEnemy(centrex:int, centrey:int, radius:int, numFollowers:int) {
-			
+		public function CirclePathEnemy(centrex:int, centrey:int, radius:int, numFollowers:int) 
+		{	
 			super(numFollowers);
 			
 			this.radius = radius;
 			
 			centre = new Point(centrex, centrey);
 			
-			matrix = new Matrix();
-			
 			a = 0;
 		}
 		
-		override public function update(dtSeconds:int):void {
-			
+		override public function update(dtSeconds:int):void
+		{	
 			super.update(dtSeconds);
 			
-			position = new Point();
+			_position = new Point();
 			
-			matrix.identity();
-			matrix.translate(radius, 0);
-			matrix.rotate(a += SPEED / 100);
-			matrix.translate(centre.x, centre.y);
+			_matrix.identity();
+			_matrix.translate(radius, 0);
+			_matrix.rotate(a += SPEED / 100);
+			_matrix.translate(centre.x, centre.y);
 			
-			position = matrix.transformPoint(position);
-			
+			_position = _matrix.transformPoint(_position);
 		}
 		
 	}

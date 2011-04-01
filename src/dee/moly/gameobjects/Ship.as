@@ -1,5 +1,5 @@
-﻿package dee.moly.gameobjects {
-	
+﻿package dee.moly.gameobjects
+{	
 	import dee.moly.utils.Animation;
 	import dee.moly.utils.Key;
 	import flash.display.BitmapData;
@@ -11,8 +11,8 @@
 	 * @author moly
 	 */
 	
-	public final class Ship extends GameObject{
-		
+	public final class Ship extends GameSprite
+	{	
 		private var startPoint:Point;
 		
 		private var rightBounds:int;
@@ -22,6 +22,8 @@
 		
 		private var dieingAnimation:Animation;
 		
+		private var velocity:Point;
+		
 		[Embed(source = '/Content/ship.png')]
 		private static const ShipTexture:Class;
 		private static const shipTexture:BitmapData = new ShipTexture().bitmapData;
@@ -30,8 +32,8 @@
 		private static const ShipSheet:Class;
 		private static const shipSheet:BitmapData = new ShipSheet().bitmapData;
 		
-		public function Ship(x:int, y:int, levelWidth:int, levelHeight:int) {
-			
+		public function Ship(x:int, y:int, levelWidth:int, levelHeight:int)
+		{	
 			super(shipTexture, x, y);
 			
 			startPoint = new Point(x, y);
@@ -42,8 +44,8 @@
 			reset();
 		}
 		
-		override public function update(dtSeconds:int):void {
-			
+		override public function update(dtSeconds:int):void 
+		{	
 			if (isAlive != true) {
 				moveBackToStart(dtSeconds);
 				return;
@@ -51,7 +53,7 @@
 			
 			velocity.y += 0.1;
 			
-			position = position.add(velocity);
+			_position = _position.add(velocity);
 			
 			checkBounds();
 			
@@ -59,46 +61,46 @@
 			
 		}
 		
-		override public function onCollision():void {
-			
+		override public function onCollision():void
+		{	
 			if (isAlive != true)
 				return;
 				
 			isAlive = false;
-			texture = dieingAnimation;
+			_texture = dieingAnimation;
 			
-			var dist:int = Math.sqrt(Math.pow(startPoint.x - position.x, 2) + Math.pow(startPoint.y - position.y, 2));
-			velocity.x = ((startPoint.x - position.x) / dist) * 20;
-			velocity.y = ((startPoint.y - position.y) / dist) * 20;
-			
-		}
-		
-		private function checkBounds():void {
-			
-			if (position.x > rightBounds - texture.width){
-				position.x = rightBounds - texture.width;
-				velocity.x = -velocity.x / 7;
-			}
-			
-			if (position.x < 0) {
-				position.x = 0;
-				velocity.x = -velocity.x / 7;
-			}
-			
-			if (position.y > lowerBounds - texture.height) {
-				position.y = lowerBounds - texture.height;
-				velocity.y = -velocity.y / 7;
-			}
-			
-			if (position.y < 0) {
-				position.y = 0;
-				velocity.y = -velocity.y / 7;
-			}
+			var dist:int = Math.sqrt(Math.pow(startPoint.x - _position.x, 2) + Math.pow(startPoint.y - _position.y, 2));
+			velocity.x = ((startPoint.x - _position.x) / dist) * 20;
+			velocity.y = ((startPoint.y - _position.y) / dist) * 20;
 			
 		}
 		
-		private function handleInput():void {
+		private function checkBounds():void 
+		{	
+			if (_position.x > rightBounds - _texture.width){
+				_position.x = rightBounds - _texture.width;
+				velocity.x = -velocity.x / 7;
+			}
 			
+			if (_position.x < 0) {
+				_position.x = 0;
+				velocity.x = -velocity.x / 7;
+			}
+			
+			if (_position.y > lowerBounds - _texture.height) {
+				_position.y = lowerBounds - _texture.height;
+				velocity.y = -velocity.y / 7;
+			}
+			
+			if (_position.y < 0) {
+				_position.y = 0;
+				velocity.y = -velocity.y / 7;
+			}
+			
+		}
+		
+		private function handleInput():void
+		{	
 			if (Key.isDown(Keyboard.LEFT))
 				velocity.x += -0.3;
 				
@@ -110,31 +112,28 @@
 				
 			if (Key.isDown(Keyboard.DOWN))
 				velocity.y += 0.1;
-				
 		}
 		
-		private function reset():void {
-			
-			texture = shipTexture;
+		private function reset():void 
+		{	
+			_texture = shipTexture;
 			dieingAnimation = new Animation(3, 5, 14, shipSheet);
 			
-			position = new Point(startPoint.x, startPoint.y);
+			_position = new Point(startPoint.x, startPoint.y);
 			velocity = new Point(0, 0);
 			
 			isAlive = true;
-			
 		}
 		
-		private function moveBackToStart(dtSeconds:int):void {
-			
+		private function moveBackToStart(dtSeconds:int):void 
+		{	
 			dieingAnimation.update(dtSeconds);
 			
 			if (dieingAnimation.currentFrame == dieingAnimation.numFrames)
-				position = position.add(velocity);
+				_position = _position.add(velocity);
 				
-			if (Math.pow(startPoint.x - position.x, 2) + Math.pow(startPoint.y - position.y, 2) < 275)
-				reset();
-			
+			if (Math.pow(startPoint.x - _position.x, 2) + Math.pow(startPoint.y - _position.y, 2) < 275)
+				reset();	
 		}
 		
 	}

@@ -1,5 +1,5 @@
-﻿package dee.moly.gameobjects.enemies {
-	
+﻿package dee.moly.gameobjects.enemies
+{	
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
@@ -8,49 +8,51 @@
 	 * @author moly
 	 */
 	
-	public final class WaypointEnemy extends Enemy{
-		
+	public final class WaypointEnemy extends Enemy
+	{	
 		private static const SPEED:int = 5;
 		
 		private var wayPoints:Vector.<Point>;
 		
 		private var currentPointIndex:int;
 		
-		public function WaypointEnemy(wayPoints:Vector.<Point>, startPointIndex:int, numFollowers:int) {
-			
+		private var velocity:Point;
+		
+		public function WaypointEnemy(wayPoints:Vector.<Point>, startPointIndex:int, numFollowers:int)
+		{	
 			super(numFollowers);
 			
 			this.wayPoints = wayPoints;
 			
+			velocity = new Point();
+			
 			currentPointIndex = startPointIndex;
 			
-			position = wayPoints[currentPointIndex];
+			_position = wayPoints[currentPointIndex];
 			
-			nextWayPoint();
-			
+			nextWayPoint();	
 		}
 		
-		override public function update(dtSeconds:int):void {
-			
+		override public function update(dtSeconds:int):void
+		{	
 			super.update(dtSeconds);
 			
-			position = position.add(velocity);
+			_position = _position.add(velocity);
 			
-			if (Math.pow(wayPoints[currentPointIndex].x - position.x, 2) + Math.pow(wayPoints[currentPointIndex].y - position.y, 2) < 10)
+			if (Math.pow(wayPoints[currentPointIndex].x - _position.x, 2) + Math.pow(wayPoints[currentPointIndex].y - _position.y, 2) < 10)
 				nextWayPoint();
-				
 		}
 		
-		private function nextWayPoint():void {
-			
-			if (++currentPointIndex >= wayPoints.length){
+		private function nextWayPoint():void 
+		{	
+			if (++currentPointIndex >= wayPoints.length)
+			{
 				currentPointIndex = 0;
 			}
 			
-			var dist:int = Math.sqrt(Math.pow(wayPoints[currentPointIndex].x - position.x, 2) + Math.pow(wayPoints[currentPointIndex].y - position.y, 2));
-			velocity.x = ((wayPoints[currentPointIndex].x - position.x) / dist) * SPEED;
-			velocity.y = ((wayPoints[currentPointIndex].y - position.y) / dist) * SPEED;
-			
+			var dist:int = Math.sqrt(Math.pow(wayPoints[currentPointIndex].x - _position.x, 2) + Math.pow(wayPoints[currentPointIndex].y - _position.y, 2));
+			velocity.x = ((wayPoints[currentPointIndex].x - _position.x) / dist) * SPEED;
+			velocity.y = ((wayPoints[currentPointIndex].y - _position.y) / dist) * SPEED;
 		}
 		
 	}

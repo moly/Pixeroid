@@ -1,37 +1,38 @@
-﻿package dee.moly.gameobjects.items {
-	
+﻿package dee.moly.gameobjects.items 
+{	
 	import flash.display.BitmapData;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
-	import dee.moly.gameobjects.GameObject;
+	import dee.moly.gameobjects.GameSprite;
 	
 	/**
 	 * A rotating parallax wall
 	 * @author moly
 	 */
 	
-	public final class RotatingParallaxWall extends ParallaxWall{
-		
-		private var matrix:Matrix;
+	public final class RotatingParallaxWall extends ParallaxWall
+	{	
 		private var r:Number;
 		
-		public function RotatingParallaxWall(xpos:int, ypos:int, texture:BitmapData, followObject:GameObject, movement:Number) {
+		public function RotatingParallaxWall(xpos:int, ypos:int, texture:BitmapData, followObject:GameSprite, movement:Number) 
+		{
 			super(xpos, ypos, texture, followObject, movement);
-			matrix = new Matrix();
 			r = 0;
 		}
 		
-		override public function update(dtSeconds:int):void {
+		override public function update(dtSeconds:int):void 
+		{
 			super.update(dtSeconds);
-			matrix.identity();
-			matrix.translate(-texture.width/2, -texture.height/2);
-			matrix.rotate(r+=0.1);
-			matrix.translate(position.x, position.y);
+			_matrix.identity();
+			_matrix.translate(-_texture.width/2, -_texture.height/2);
+			_matrix.rotate(r+=0.1);
+			_matrix.translate(_position.x, _position.y);
 		}
 		
-		override public function draw(canvas:BitmapData, cameraPosition:Point, blendMode:String = ""):void {
-			matrix.translate( -cameraPosition.x, -cameraPosition.y);
-			canvas.draw(texture, matrix, null, blendMode);
+		override public function draw(canvas:BitmapData, cameraPosition:Point):void 
+		{
+			_matrix.translate( -cameraPosition.x, -cameraPosition.y);
+			canvas.draw(_texture, _matrix, null, _blendMode);
 		}
 		
 	}

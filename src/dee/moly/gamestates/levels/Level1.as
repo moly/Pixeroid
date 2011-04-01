@@ -113,18 +113,18 @@
 	
 			bg.draw(canvas, cameraPosition);
 			
-			whiteWalls.draw(canvas, cameraPosition, BlendMode.OVERLAY);
-			orangeWalls.draw(canvas, cameraPosition, BlendMode.OVERLAY);
-			blueWalls.draw(canvas, cameraPosition, BlendMode.OVERLAY);
+			whiteWalls.draw(canvas, cameraPosition);
+			orangeWalls.draw(canvas, cameraPosition);
+			blueWalls.draw(canvas, cameraPosition);
 			
-			whiteRotator.draw(canvas, cameraPosition, BlendMode.OVERLAY);
-			orangeRotator.draw(canvas, cameraPosition, BlendMode.OVERLAY);
-			blueRotator.draw(canvas, cameraPosition, BlendMode.OVERLAY);
+			whiteRotator.draw(canvas, cameraPosition);
+			orangeRotator.draw(canvas, cameraPosition);
+			blueRotator.draw(canvas, cameraPosition);
 			
-			ship.draw(canvas, cameraPosition, BlendMode.MULTIPLY);
-			star.draw(canvas, cameraPosition, BlendMode.MULTIPLY);			
+			ship.draw(canvas, cameraPosition);
+			star.draw(canvas, cameraPosition);			
 			
-			skull.draw(canvas, cameraPosition, BlendMode.MULTIPLY);
+			skull.draw(canvas, cameraPosition);
 
 			border.draw(canvas, cameraPosition);
 			

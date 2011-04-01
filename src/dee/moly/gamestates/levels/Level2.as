@@ -116,14 +116,14 @@
 			
 			bg.draw(canvas, cameraPosition);
 			
-			ship.draw(canvas, cameraPosition, BlendMode.MULTIPLY);
-			star.draw(canvas, cameraPosition, BlendMode.MULTIPLY);
+			ship.draw(canvas, cameraPosition);
+			star.draw(canvas, cameraPosition);
 			
 			for each(var enemy:Enemy in enemies)
 				enemy.draw(canvas, cameraPosition);
 				
 			for each(var coin:Coin in coins)
-				coin.draw(canvas, cameraPosition, BlendMode.MULTIPLY);
+				coin.draw(canvas, cameraPosition);
 			
 			border.draw(canvas, cameraPosition);
 			

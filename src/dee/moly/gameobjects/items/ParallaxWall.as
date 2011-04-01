@@ -1,6 +1,6 @@
-﻿package dee.moly.gameobjects.items {
-	
-	import dee.moly.gameobjects.GameObject;
+﻿package dee.moly.gameobjects.items 
+{	
+	import dee.moly.gameobjects.GameSprite;
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
@@ -9,29 +9,27 @@
 	 * @author moly
 	 */
 	
-	public class ParallaxWall extends GameObject{
-		
+	public class ParallaxWall extends GameSprite
+	{	
 		private var startPosition:Point;
-		private var followObject:GameObject;
+		private var followObject:GameSprite;
 		private var movement:Number;
 		
-		public function ParallaxWall(x:int, y:int, texture:BitmapData, followObject:GameObject, movement:Number) {
-			
+		public function ParallaxWall(x:int, y:int, texture:BitmapData, followObject:GameSprite, movement:Number)
+		{	
 			super(texture);
 			this.startPosition = new Point(x, y);
 			this.followObject = followObject;
-			this.movement = movement;
-			
+			this.movement = movement;	
 		}
 		
-		override public function update(dtSeconds:int):void {
-			
+		override public function update(dtSeconds:int):void 
+		{	
 			var centreX:int = (Main.SCREEN_WIDTH / 2) - (followObject.width / 2);
 			var centreY:int = (Main.SCREEN_HEIGHT / 2) - (followObject.height / 2);
 			
-			position.x = startPosition.x + (centreX - followObject.x) * movement;
-			position.y = startPosition.y + (centreY - followObject.y) * movement;
-			
+			_position.x = startPosition.x + (centreX - followObject.x) * movement;
+			_position.y = startPosition.y + (centreY - followObject.y) * movement;	
 		}
 		
 	}

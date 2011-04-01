@@ -1,6 +1,6 @@
-﻿package dee.moly.gameobjects.items {
-	
-	import dee.moly.gameobjects.GameObject;
+﻿package dee.moly.gameobjects.items
+{
+	import dee.moly.gameobjects.GameSprite;
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
@@ -9,14 +9,14 @@
 	 * @author moly
 	 */
 	
-	public final class Star extends GameObject{
-		
+	public final class Star extends GameSprite
+	{	
 		[Embed(source = '/Content/star.png')]
 		public static const StarTexture:Class;
 		public static const starTexture:BitmapData = new StarTexture().bitmapData;
 		
-		public function Star(x:int, y:int) {
-			
+		public function Star(x:int, y:int) 
+		{	
 			super(starTexture, x, y);		
 		}
 		
