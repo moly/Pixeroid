@@ -1,5 +1,5 @@
-﻿package dee.moly.gamestates.levels {
-	
+﻿package dee.moly.gamestates.levels 
+{	
 	import dee.moly.gameobjects.Background;
 	import dee.moly.gameobjects.GameObject;
 	import dee.moly.gameobjects.items.RotatingParallaxWall;
@@ -17,9 +17,9 @@
 	 * @author moly
 	 */
 	
-	public final class Level1 extends LevelState{
-		
-		private static const START_POINT:Point = new Point(0, 850);
+	public final class Level1 extends LevelState
+	{	
+		private static const START_POINT:Point = new Point(450, 850);
 		private static const END_POINT:Point = new Point(450, 600);
 		
 		private var whiteWalls:ParallaxWall;
@@ -66,8 +66,8 @@
 		private static const BlueRotatorTexture:Class;
 		private static const blueRotatorTexture:BitmapData = new BlueRotatorTexture().bitmapData;
 		
-		public function Level1() {
-			
+		public function Level1() 
+		{	
 			border = new Background(borderTexture);
 			
 			bg = new Background(bgTexture);
@@ -78,17 +78,17 @@
 			
 			skull = new Skull(580, 100);
 			
-			whiteWalls = new ParallaxWall(0, 0, whiteWallsTexture, ship, 0.1);
-			orangeWalls = new ParallaxWall(0, 0, orangeWallsTexture, ship, 0.2);
-			blueWalls = new ParallaxWall(0, 0, blueWallsTexture, ship, 0.3);
+			whiteWalls = new ParallaxWall(whiteWallsTexture, 0, 0, ship, 0.1);
+			orangeWalls = new ParallaxWall(orangeWallsTexture, 0, 0, ship, 0.2);
+			blueWalls = new ParallaxWall(blueWallsTexture, 0, 0, ship, 0.3);
 			
-			whiteRotator = new RotatingParallaxWall(700, 700, whiteRotatorTexture, ship, 0.1);
-			orangeRotator = new RotatingParallaxWall(700, 700, orangeRotatorTexture, ship, 0.2);
-			blueRotator = new RotatingParallaxWall(700, 700, blueRotatorTexture, ship, 0.3);
+			whiteRotator = new RotatingParallaxWall(whiteRotatorTexture, 420, 650, ship, 0.1);
+			orangeRotator = new RotatingParallaxWall(orangeRotatorTexture, 420, 650, ship, 0.2);
+			blueRotator = new RotatingParallaxWall(blueRotatorTexture, 420, 650, ship, 0.3);
 		}
 		
-		override public function update(dtSeconds:int):void {
-			
+		override public function update(dtSeconds:int):void 
+		{	
 			scrollCamera();
 			
 			ship.update(dtSeconds);
@@ -105,12 +105,11 @@
 			
 			whiteRotator.update(dtSeconds);
 			orangeRotator.update(dtSeconds);
-			blueRotator.update(dtSeconds);
-			
+			blueRotator.update(dtSeconds);	
 		}
 		
-		override public function draw(canvas:BitmapData):void {
-	
+		override public function draw(canvas:BitmapData):void 
+		{
 			bg.draw(canvas, cameraPosition);
 			
 			whiteWalls.draw(canvas, cameraPosition);
@@ -126,8 +125,7 @@
 			
 			skull.draw(canvas, cameraPosition);
 
-			border.draw(canvas, cameraPosition);
-			
+			border.draw(canvas, cameraPosition);	
 		}
 		
 	}

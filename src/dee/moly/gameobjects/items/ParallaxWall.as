@@ -15,7 +15,7 @@
 		private var followObject:GameSprite;
 		private var movement:Number;
 		
-		public function ParallaxWall(x:int, y:int, texture:BitmapData, followObject:GameSprite, movement:Number)
+		public function ParallaxWall(texture:BitmapData, x:int, y:int, followObject:GameSprite, movement:Number)
 		{	
 			super(texture);
 			this.startPosition = new Point(x, y);

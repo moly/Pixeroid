@@ -33,16 +33,23 @@ package dee.moly.gameobjects
 		}
 		
 		public function get height():int {
-			
 			return _texture.height;
 		}
 		
-		protected var _matrix:Matrix;
+		protected var _rotation:Number;
+		public function set rotation(value:Number):void {
+			_rotation = value;
+		}
+		public function get rotation():Number {
+			return _rotation;
+		}
 		
 		protected var _blendMode:String;
 		public function set blendMode(value:String):void {
 			_blendMode = value;
 		}
+		
+		protected var _matrix:Matrix;
 		
 		protected var collisionTestPoints:Vector.<Point>;
 				
@@ -51,6 +58,7 @@ package dee.moly.gameobjects
 			_texture = texture;
 			_position = new Point(x, y);
 			_matrix = new Matrix();
+			_rotation = 0;
 		}
 		
 		override public function draw(canvas:BitmapData, cameraPosition:Point):void 
@@ -62,8 +70,10 @@ package dee.moly.gameobjects
 			else
 			{
 				_matrix.identity();
-				_matrix.tx = _position.x - cameraPosition.x;
-				_matrix.ty = _position.y - cameraPosition.y;
+				_matrix.translate( -width / 2, -height / 2);
+				_matrix.rotate(rotation);
+				_matrix.translate(width / 2, height / 2);
+				_matrix.translate(_position.x - cameraPosition.x, _position.y - cameraPosition.y)
 				canvas.draw(_texture, _matrix, null, _blendMode);
 			}
 		}
