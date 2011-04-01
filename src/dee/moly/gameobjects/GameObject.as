@@ -12,7 +12,8 @@
 	
 	public class GameObject{
 		
-		protected var texture:BitmapData
+		//protected var texture:BitmapData
+		public var texture:BitmapData;
 		
 		protected var position:Point;
 		public function get x():int {
@@ -28,6 +29,8 @@
 			position.y = value;
 		}
 		
+		private var matrix:Matrix;
+		
 		public function get width():int {
 			return texture.width;
 		}
@@ -40,9 +43,12 @@
 		
 		protected var velocity:Point;
 		
-		public function GameObject() {
-			position = new Point(0, 0);
+		public function GameObject(texture:BitmapData, x:int = 0, y:int = 0) {
+			
+			this.texture = texture;
+			position = new Point(x, y);
 			velocity = new Point(0, 0);
+			matrix = new Matrix();
 		}
 		
 		public function update(dtSeconds:int):void {
@@ -51,22 +57,23 @@
 		
 		public function draw(canvas:BitmapData, cameraPosition:Point, blendMode:String = ""):void {
 		
+			var positionOnScreen:Point = position.subtract(cameraPosition);
+				
 			if(blendMode == "")
-				canvas.copyPixels(texture, texture.rect, position.subtract(cameraPosition), null, null, true);
+				canvas.copyPixels(texture, texture.rect, positionOnScreen, null, null, true);
 			else{
-				var matrix:Matrix = new Matrix(1, 0, 0, 1, position.x - cameraPosition.x, position.y - cameraPosition.y);
+				matrix.tx = positionOnScreen.x
+				matrix.ty = positionOnScreen.y;
 				canvas.draw(texture, matrix, null, blendMode);
 			}
 				
 		}
 		
-		public function checkCollisions(gameObject:GameObject, alphaThreshold:uint):Boolean {
+		public function checkCollision(gameObject:GameObject, alphaThreshold:uint):Boolean {
 			
-			for (var i:int = 0; i < collisionTestPoints.length; ++i) {
-				if(gameObject.texture.hitTest(new Point(), alphaThreshold, new Point((collisionTestPoints[i].x + position.x) - gameObject.x, (collisionTestPoints[i].y + position.y) - gameObject.y))){		
-					return(true);
-				}
-			}
+			if (gameObject.texture.hitTest(gameObject.position, alphaThreshold, this.texture, this.position, 0x22))
+				return true;
+				
 			return false;
 		}
 		

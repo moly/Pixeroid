@@ -9,7 +9,7 @@
 	 * @author moly
 	 */
     
-    public class Key {
+    public final class Key {
 		
         private static var keys:Array;
 		

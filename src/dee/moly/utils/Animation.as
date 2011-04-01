@@ -9,17 +9,23 @@
 	 * @author moly
 	 */
 	
-	public class Animation extends BitmapData{
+	public final class Animation extends BitmapData{
 		
 		private var sheet:BitmapData;
 		
-		private var currentCell:int;
+		private var _currentFrame:int;
+		public function get currentFrame():int {
+			return _currentFrame;
+		}
 		
-		private var numFrames:int;
+		private var _numFrames:int;
+		public function get numFrames():int {
+			return _numFrames;
+		}
 		
-		private var cellWidth:int;
+		private var frameWidth:int;
 		
-		private var cellHeight:int;
+		private var frameHeight:int;
 		
 		private var copyRect:Rectangle;
 		
@@ -32,15 +38,18 @@
 		public function Animation(rows:int, columns:int, numFrames:int, sheet:BitmapData, repeat:Boolean = false) {
 			
 			this.sheet = sheet;
-			this.numFrames = numFrames;
+			this._numFrames = numFrames;
 			this.repeat = repeat;
 			
-			cellWidth = sheet.width / columns;
-			cellHeight = sheet.height / rows;
-			trace(sheet.width + " " + columns);
-			copyRect = new Rectangle(0, 0, cellWidth, cellHeight);
+			frameWidth = sheet.width / columns;
+			frameHeight = sheet.height / rows;
 			
-			super(cellWidth, cellHeight);
+			copyRect = new Rectangle(0, 0, frameWidth, frameHeight);
+			
+			super(frameWidth, frameHeight);
+			
+			copyPixels(sheet, copyRect, origin, null, null, true);
+			copyRect.x += frameWidth;
 			
 		}
 		
@@ -49,22 +58,22 @@
 			if (done == true)
 				return;
 			
-			fillRect(rect, 0xFFFFFFFF);
+			fillRect(rect, 0x00FFFFFF);
 			copyPixels(sheet, copyRect, origin, null, null, true);
 			
-			if ((copyRect.x += cellWidth) >= sheet.width){
+			if ((copyRect.x += frameWidth) >= sheet.width){
 				copyRect.x = 0;
-				copyRect.y += cellHeight;
+				copyRect.y += frameHeight;
 			}
 			
-			if (++currentCell >= numFrames) {
+			if (++_currentFrame >= _numFrames) {
 				if (repeat == false) {
 					done = true;
-					return;
+				}else{
+					copyRect.x = 0;
+					copyRect.y = 0;
+					_currentFrame = 0;
 				}
-				copyRect.x = 0;
-				copyRect.y = 0;
-				currentCell = 0;
 			}
 			
 		}

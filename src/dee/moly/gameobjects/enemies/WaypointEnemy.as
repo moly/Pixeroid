@@ -1,6 +1,5 @@
-﻿package dee.moly.gameobjects {
+﻿package dee.moly.gameobjects.enemies {
 	
-	import dee.moly.utils.ContentManager;
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
@@ -9,7 +8,7 @@
 	 * @author moly
 	 */
 	
-	public class WaypointEnemy extends Enemy{
+	public final class WaypointEnemy extends Enemy{
 		
 		private static const SPEED:int = 5;
 		
@@ -20,8 +19,6 @@
 		public function WaypointEnemy(wayPoints:Vector.<Point>, startPointIndex:int, numFollowers:int) {
 			
 			super(numFollowers);
-			
-			texture = ContentManager.load("level2/enemy");
 			
 			this.wayPoints = wayPoints;
 			

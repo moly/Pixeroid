@@ -1,15 +1,14 @@
 ﻿package {
 	
+	import adobe.utils.CustomActions;
 	import dee.moly.gamestates.GameState;
-	import dee.moly.gamestates.Level1;
-	import dee.moly.gamestates.Level2
+	import dee.moly.gamestates.levels.Level1;
+	import dee.moly.gamestates.levels.Level2
 	import dee.moly.utils.Key;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
 	import flash.events.Event;
-	import flash.events.TimerEvent;
-	import flash.utils.Timer;
 	
 	/**
 	 * Entry point
@@ -23,11 +22,9 @@
 		
 		private var canvas:BitmapData;
 		
-		private var gameTimer:Timer;
-		
 		private var currentState:GameState;
 		
-		public function Main():void {
+		public function Main() {
 			if (stage) init();
 			else addEventListener(Event.ADDED_TO_STAGE, init);
 		}
@@ -38,17 +35,15 @@
 			
 			Key.initialise(stage);
 			
-			currentState = new Level1();
+			currentState = new Level2();
 			
 			canvas = new BitmapData(SCREEN_WIDTH, SCREEN_HEIGHT, false, 0xFFFFFF);
 			addChild(new Bitmap(canvas));
 			
-			gameTimer = new Timer(25);
-			gameTimer.addEventListener(TimerEvent.TIMER, update);
-			gameTimer.start();
+			addEventListener(Event.ENTER_FRAME, update);
 		}
 		
-		private function update(e:TimerEvent):void {
+		private function update(e:Event):void {
 			
 			currentState.update(4);
 			
@@ -58,8 +53,6 @@
 			
 			if (currentState.moveToNextState == true)
 				currentState = new (currentState.nextState)();
-			
-			//e.updateAfterEvent();
 				
 		}
 		

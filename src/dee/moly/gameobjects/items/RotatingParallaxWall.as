@@ -1,15 +1,16 @@
-﻿package dee.moly.gameobjects {
+﻿package dee.moly.gameobjects.items {
 	
 	import flash.display.BitmapData;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
+	import dee.moly.gameobjects.GameObject;
 	
 	/**
 	 * A rotating parallax wall
 	 * @author moly
 	 */
 	
-	public class RotatingParallaxWall extends ParallaxWall{
+	public final class RotatingParallaxWall extends ParallaxWall{
 		
 		private var matrix:Matrix;
 		private var r:Number;

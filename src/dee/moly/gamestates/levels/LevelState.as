@@ -1,8 +1,9 @@
-﻿package dee.moly.gamestates {
+﻿package dee.moly.gamestates.levels {
 	
+	import dee.moly.gamestates.GameState;
 	import dee.moly.gameobjects.Ship;
-	import dee.moly.gameobjects.Star;
-	import dee.moly.gameobjects.Border;
+	import dee.moly.gameobjects.items.Star;
+	import dee.moly.gameobjects.Background;
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
@@ -17,7 +18,7 @@
 		
 		protected var star:Star;
 		
-		protected var border:Border;
+		protected var border:Background;
 		
 		protected var cameraPosition:Point;
 		
@@ -39,8 +40,8 @@
 		
 		protected function scrollCamera():void{
 			
-			const horizontalViewMargin:Number = 0.35;
-			const verticalViewMargin:Number = 0.35;
+			const horizontalViewMargin:Number = 0.5;
+			const verticalViewMargin:Number = 0.5;
 			
 			var marginWidth:Number = Main.SCREEN_WIDTH * horizontalViewMargin;
 			var marginLeft:Number = cameraPosition.x + marginWidth;
@@ -77,7 +78,7 @@
 				return max;
 				
 			return value <= 0 || value >= 0 ? value : 0;
-			
+	
 		}
 		
 	}

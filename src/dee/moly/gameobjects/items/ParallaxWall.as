@@ -1,5 +1,6 @@
-﻿package dee.moly.gameobjects {
+﻿package dee.moly.gameobjects.items {
 	
+	import dee.moly.gameobjects.GameObject;
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
@@ -14,10 +15,10 @@
 		private var followObject:GameObject;
 		private var movement:Number;
 		
-		public function ParallaxWall(xpos:int, ypos:int, texture:BitmapData, followObject:GameObject, movement:Number) {
+		public function ParallaxWall(x:int, y:int, texture:BitmapData, followObject:GameObject, movement:Number) {
 			
-			this.startPosition = new Point(xpos, ypos);
-			this.texture = texture;
+			super(texture);
+			this.startPosition = new Point(x, y);
 			this.followObject = followObject;
 			this.movement = movement;
 			

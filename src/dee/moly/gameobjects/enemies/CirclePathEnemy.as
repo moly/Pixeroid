@@ -1,6 +1,6 @@
-﻿package dee.moly.gameobjects {
+﻿package dee.moly.gameobjects.enemies {
 	
-	import dee.moly.utils.ContentManager;
+	import flash.display.BitmapData;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	
@@ -9,7 +9,7 @@
 	 * @author moly
 	 */
 	
-	public class CirclePathEnemy extends Enemy{
+	public final class CirclePathEnemy extends Enemy{
 		
 		private static const SPEED:int = 5;
 		
@@ -31,10 +31,7 @@
 			
 			matrix = new Matrix();
 			
-			texture = ContentManager.load("level2/enemy");
-			
 			a = 0;
-			
 		}
 		
 		override public function update(dtSeconds:int):void {
