@@ -2,6 +2,7 @@
 {	
 	import dee.moly.gameobjects.GameSprite;
 	import flash.display.BitmapData;
+	import flash.display.BlendMode;
 	import flash.geom.Point;
 	
 	/**
@@ -18,6 +19,7 @@
 		public function Coin(x:int, y:int) 
 		{	
 			super(coinTexture, x, y);
+			blendMode = BlendMode.MULTIPLY;
 		}
 		
 	}

@@ -59,9 +59,10 @@ package dee.moly.gameobjects
 			_position = new Point(x, y);
 			_matrix = new Matrix();
 			_rotation = 0;
+			_blendMode = BlendMode.NORMAL;
 		}
 		
-		override public function draw(canvas:BitmapData, cameraPosition:Point):void 
+		override public function draw(canvas:BitmapData, cameraPosition:Point = null):void 
 		{
 			if (_blendMode == BlendMode.NORMAL)
 			{

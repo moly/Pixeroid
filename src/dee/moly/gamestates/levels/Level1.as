@@ -19,20 +19,20 @@
 	
 	public final class Level1 extends LevelState
 	{	
-		private static const START_POINT:Point = new Point(450, 850);
+		private static const START_POINT:Point = new Point(10, 850);
 		private static const END_POINT:Point = new Point(450, 600);
 		
-		private var whiteWalls:ParallaxWall;
-		private var orangeWalls:ParallaxWall;
-		private var blueWalls:ParallaxWall;
+		private var _whiteWalls:ParallaxWall;
+		private var _orangeWalls:ParallaxWall;
+		private var _blueWalls:ParallaxWall;
 		
-		private var whiteRotator:RotatingParallaxWall;
-		private var orangeRotator:RotatingParallaxWall;
-		private var blueRotator:RotatingParallaxWall;
+		private var _whiteRotator:RotatingParallaxWall;
+		private var _orangeRotator:RotatingParallaxWall;
+		private var _blueRotator:RotatingParallaxWall;
 		
-		private var bg:Background;
+		private var _bg:Background;
 		
-		private var skull:Skull;
+		private var _skull:Skull;
 		
 		[Embed(source = '/Content/level1/border.png')]
 		private static const BorderTexture:Class;
@@ -68,48 +68,68 @@
 		
 		public function Level1() 
 		{	
-			border = new Background(borderTexture);
 			
-			bg = new Background(bgTexture);
+		}
+		
+		override public function init():void 
+		{
+			super.init();
 			
-			ship = new Ship(START_POINT.x, START_POINT.y, border.width, border.height);
+			_levelWidth = borderTexture.width;
+			_levelHeight = borderTexture.height;
 			
-			star = new Star(END_POINT.x, END_POINT.y);
+			_bg = new Background(bgTexture);
+			add(_bg);
 			
-			skull = new Skull(580, 100);
+			_ship = new Ship(START_POINT.x, START_POINT.y, _levelWidth, _levelHeight);
+			add(_ship);
 			
-			whiteWalls = new ParallaxWall(whiteWallsTexture, 0, 0, ship, 0.1);
-			orangeWalls = new ParallaxWall(orangeWallsTexture, 0, 0, ship, 0.2);
-			blueWalls = new ParallaxWall(blueWallsTexture, 0, 0, ship, 0.3);
+			_star = new Star(END_POINT.x, END_POINT.y);
+			add(_star);
 			
-			whiteRotator = new RotatingParallaxWall(whiteRotatorTexture, 420, 650, ship, 0.1);
-			orangeRotator = new RotatingParallaxWall(orangeRotatorTexture, 420, 650, ship, 0.2);
-			blueRotator = new RotatingParallaxWall(blueRotatorTexture, 420, 650, ship, 0.3);
+			_skull = new Skull(580, 100);
+			add(_skull);
+			
+			_whiteWalls = new ParallaxWall(whiteWallsTexture, 0, 0, _ship, 0.1);
+			_orangeWalls = new ParallaxWall(orangeWallsTexture, 0, 0, _ship, 0.2);
+			_blueWalls = new ParallaxWall(blueWallsTexture, 0, 0, _ship, 0.3);
+			add(_whiteWalls); add(_orangeWalls); add(_blueWalls);
+			
+			_whiteRotator = new RotatingParallaxWall(whiteRotatorTexture, 420, 650, _ship, 0.1);
+			_orangeRotator = new RotatingParallaxWall(orangeRotatorTexture, 420, 650, _ship, 0.2);
+			_blueRotator = new RotatingParallaxWall(blueRotatorTexture, 420, 650, _ship, 0.3);
+			add(_whiteRotator); add(_orangeRotator); add(_blueRotator);
+			
+			_border = new Background(borderTexture);
+			add(_border);
 		}
 		
 		override public function update(dtSeconds:int):void 
 		{	
-			scrollCamera();
+			super.update(dtSeconds);
+			//scrollCamera();
 			
-			ship.update(dtSeconds);
+			//ship.update(dtSeconds);
 			
-			if (ship.checkCollision(whiteWalls, 0xDD))
-				ship.onCollision();
+			if (_ship.checkCollision(_whiteWalls, 0xDD))
+				_ship.onCollision();
 				
-			if (ship.checkCollision(star, 0xEE))
+			if (_ship.checkCollision(_star, 0xEE))
 				changeState(Level2);
 				
-			whiteWalls.update(dtSeconds);	
-			orangeWalls.update(dtSeconds);
-			blueWalls.update(dtSeconds);
+			//whiteWalls.update(dtSeconds);	
+			//orangeWalls.update(dtSeconds);
+			//blueWalls.update(dtSeconds);
 			
-			whiteRotator.update(dtSeconds);
-			orangeRotator.update(dtSeconds);
-			blueRotator.update(dtSeconds);	
+			//whiteRotator.update(dtSeconds);
+			//orangeRotator.update(dtSeconds);
+			//blueRotator.update(dtSeconds);	
 		}
 		
 		override public function draw(canvas:BitmapData):void 
 		{
+			super.draw(canvas);
+			/*
 			bg.draw(canvas, cameraPosition);
 			
 			whiteWalls.draw(canvas, cameraPosition);
@@ -125,7 +145,8 @@
 			
 			skull.draw(canvas, cameraPosition);
 
-			border.draw(canvas, cameraPosition);	
+			border.draw(canvas, cameraPosition);
+			*/
 		}
 		
 	}

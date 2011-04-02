@@ -15,9 +15,11 @@
 	
 	public class GameObject
 	{							
+		public var exists:Boolean;
+		
 		public function GameObject() 
 		{
-			
+			exists = true;
 		}
 		
 		public function update(dtSeconds:int):void 
@@ -25,7 +27,7 @@
 			
 		}
 		
-		public function draw(canvas:BitmapData, cameraPosition:Point):void 
+		public function draw(canvas:BitmapData, cameraPosition:Point = null):void 
 		{
 			
 		}

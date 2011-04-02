@@ -40,7 +40,7 @@
 			pastPoints.push(_position);
 		}
 		
-		override public function draw(canvas:BitmapData, cameraPosition:Point):void 
+		override public function draw(canvas:BitmapData, cameraPosition:Point = null):void 
 		{	
 			super.draw(canvas, cameraPosition.subtract(new Point( -_texture.width / 2, -_texture.height / 2)));
 			

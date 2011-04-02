@@ -1,5 +1,7 @@
-﻿package dee.moly.gamestates {
-	
+﻿package dee.moly.gamestates 
+{	
+	import dee.moly.gameobjects.GameGroup;
+	import dee.moly.gameobjects.GameObject;
 	import flash.display.BitmapData;
 	
 	/**
@@ -8,8 +10,8 @@
 	 * @author moly
 	 */
 	
-	public class GameState{
-		
+	public class GameState
+	{	
 		private var _moveToNextState:Boolean;
 		public function get moveToNextState():Boolean {
 			return _moveToNextState;
@@ -20,23 +22,37 @@
 			return _nextState;
 		}
 		
-		public function GameState() {
+		protected var _gameObjects:GameGroup;
+		
+		public function GameState()
+		{
 			
 		}
 		
-		public function update(dtSeconds:int):void {
-			
+		public function init():void
+		{
+			_gameObjects = new GameGroup();
 		}
 		
-		public function draw(canvas:BitmapData):void {
-			
+		public function update(dtSeconds:int):void 
+		{
+			_gameObjects.update(dtSeconds);
 		}
 		
-		protected function changeState(state:Class):void {
-			
+		public function draw(canvas:BitmapData):void
+		{
+			_gameObjects.draw(canvas);
+		}
+		
+		protected function add(gameObject:GameObject):void
+		{
+			_gameObjects.add(gameObject);
+		}
+		
+		protected function changeState(state:Class):void
+		{	
 			_moveToNextState = true;
-			_nextState = state;	
-			
+			_nextState = state;		
 		}
 		
 	}

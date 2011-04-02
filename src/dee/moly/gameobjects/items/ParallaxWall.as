@@ -2,6 +2,7 @@
 {	
 	import dee.moly.gameobjects.GameSprite;
 	import flash.display.BitmapData;
+	import flash.display.BlendMode;
 	import flash.geom.Point;
 	
 	/**
@@ -18,6 +19,7 @@
 		public function ParallaxWall(texture:BitmapData, x:int, y:int, followObject:GameSprite, movement:Number)
 		{	
 			super(texture);
+			blendMode = BlendMode.OVERLAY;
 			this.startPosition = new Point(x, y);
 			this.followObject = followObject;
 			this.movement = movement;	

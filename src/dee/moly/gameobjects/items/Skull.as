@@ -1,5 +1,6 @@
 ﻿package dee.moly.gameobjects.items
 {	
+	import flash.display.BlendMode;
 	import flash.geom.Point;
 	import flash.display.BitmapData;
 	import dee.moly.gameobjects.GameSprite;
@@ -17,7 +18,8 @@
 		
 		public function Skull(x:int, y:int) 
 		{	
-			super(skullTexture, x, y);		
+			super(skullTexture, x, y);
+			blendMode = BlendMode.MULTIPLY;
 		}
 		
 	}

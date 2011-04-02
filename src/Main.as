@@ -35,7 +35,8 @@
 			
 			Key.initialise(stage);
 			
-			currentState = new Level1();
+			currentState = new Level2();
+			currentState.init();
 			
 			canvas = new BitmapData(SCREEN_WIDTH, SCREEN_HEIGHT, false, 0xFFFFFF);
 			addChild(new Bitmap(canvas));
@@ -52,7 +53,10 @@
 			canvas.unlock();
 			
 			if (currentState.moveToNextState == true)
+			{
 				currentState = new (currentState.nextState)();
+				currentState.init();
+			}
 				
 		}
 		

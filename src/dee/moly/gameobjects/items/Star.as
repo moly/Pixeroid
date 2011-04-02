@@ -2,6 +2,7 @@
 {
 	import dee.moly.gameobjects.GameSprite;
 	import flash.display.BitmapData;
+	import flash.display.BlendMode;
 	import flash.geom.Point;
 	
 	/**
@@ -17,7 +18,8 @@
 		
 		public function Star(x:int, y:int) 
 		{	
-			super(starTexture, x, y);		
+			super(starTexture, x, y);
+			blendMode = BlendMode.MULTIPLY;
 		}
 		
 	}

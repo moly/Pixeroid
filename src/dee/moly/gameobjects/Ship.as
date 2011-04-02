@@ -3,6 +3,7 @@
 	import dee.moly.utils.Animation;
 	import dee.moly.utils.Key;
 	import flash.display.BitmapData;
+	import flash.display.BlendMode;
 	import flash.geom.Point;
 	import flash.ui.Keyboard;
 	
@@ -35,6 +36,7 @@
 		public function Ship(x:int, y:int, levelWidth:int, levelHeight:int)
 		{	
 			super(shipTexture, x, y);
+			blendMode = BlendMode.MULTIPLY;
 			
 			startPoint = new Point(x, y);
 			
