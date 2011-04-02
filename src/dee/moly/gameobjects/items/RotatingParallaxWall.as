@@ -20,20 +20,9 @@
 		override public function update(dtSeconds:int):void 
 		{
 			super.update(dtSeconds);
-			//_matrix.identity();
-			//_matrix.translate(-_texture.width/2, -_texture.height/2);
-			//_matrix.rotate(r+=0.1);
-			//_matrix.translate(_position.x, _position.y);
 			rotation += 0.1;
 		}
 		
-		/*
-		override public function draw(canvas:BitmapData, cameraPosition:Point):void 
-		{
-			_matrix.translate( -cameraPosition.x, -cameraPosition.y);
-			canvas.draw(_texture, _matrix, null, _blendMode);
-		}
-		*/
 	}
 
 }

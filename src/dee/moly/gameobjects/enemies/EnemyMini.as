@@ -1,5 +1,6 @@
 ﻿package dee.moly.gameobjects.enemies 
 {	
+	import content.Content;
 	import dee.moly.gameobjects.GameSprite;
 	import flash.display.BitmapData;
 	
@@ -10,13 +11,11 @@
 	
 	public class EnemyMini extends GameSprite
 	{	
-		[Embed(source = '/Content/level2/enemymini.png')]
-		public static const EnemyMiniTexture:Class;
-		public static const enemyMiniTexture:BitmapData = new EnemyMiniTexture().bitmapData;
+		private static const _enemyMiniTexture:BitmapData = Content.createTexture(Content.EnemyMiniTexture);
 		
 		public function EnemyMini() 
 		{	
-			super(enemyMiniTexture);			
+			super(_enemyMiniTexture);			
 		}
 		
 	}

@@ -5,7 +5,7 @@
     <movie disabled="False" />
     <movie input="" />
     <movie path="bin\Pixeroid.swf" />
-    <movie fps="24" />
+    <movie fps="40" />
     <movie width="650" />
     <movie height="650" />
     <movie version="11" />

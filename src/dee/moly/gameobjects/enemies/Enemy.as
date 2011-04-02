@@ -1,5 +1,6 @@
 ﻿package dee.moly.gameobjects.enemies 
 {	
+	import content.Content;
 	import dee.moly.gameobjects.GameSprite;
 	import flash.display.BitmapData;
 	import flash.geom.Point;
@@ -11,56 +12,54 @@
 	
 	public class Enemy extends GameSprite
 	{	
+		private static const _enemyTexture:BitmapData = Content.createTexture(Content.EnemyTexture);
+		
+		private var _followers:Vector.<EnemyMini>;
 		public function get miniEnemies():Vector.<EnemyMini> {
-			return followers;
+			return _followers;
 		}
-		private var followers:Vector.<EnemyMini>;
 		
-		private var pastPoints:Vector.<Point>;
-		
-		[Embed(source = '/Content/level2/enemy.png')]
-		private static const EnemyTexture:Class;
-		private static const enemyTexture:BitmapData = new EnemyTexture().bitmapData;
+		private var _pastPoints:Vector.<Point>;
 		
 		public function Enemy(numFollowers:int) 
 		{	
-			super(enemyTexture);
+			super(_enemyTexture);
 			
-			pastPoints = new Vector.<Point>();
+			_pastPoints = new Vector.<Point>();
 			
-			followers = new Vector.<EnemyMini>();
+			_followers = new Vector.<EnemyMini>();
 			
 			for (var i:int = 0; i < numFollowers; i++)
-				followers.push(new EnemyMini());
+				_followers.push(new EnemyMini());
 		}
 		
 		override public function update(dtSeconds:int):void
 		{
 			moveFollowers();
-			pastPoints.push(_position);
+			_pastPoints.push(_position);
 		}
 		
 		override public function draw(canvas:BitmapData, cameraPosition:Point = null):void 
 		{	
 			super.draw(canvas, cameraPosition.subtract(new Point( -_texture.width / 2, -_texture.height / 2)));
 			
-			for each (var f:EnemyMini in followers)
+			for each (var f:EnemyMini in _followers)
 				f.draw(canvas, cameraPosition.subtract(new Point( -f.width / 2, -f.height / 2)));
 		}
 		
 		private function moveFollowers():void 
 		{	
-			for (var i:int = 0; i < followers.length; i++) 
+			for (var i:int = 0; i < _followers.length; i++) 
 			{
-				if (pastPoints.length > i * 5)
+				if (_pastPoints.length > i * 5)
 				{
-					followers[i].x = pastPoints[i * 5].x;
-					followers[i].y = pastPoints[i * 5].y;
+					_followers[i].x = _pastPoints[i * 5].x;
+					_followers[i].y = _pastPoints[i * 5].y;
 				}
 			}
 			
-			if (pastPoints.length > followers.length * 5)
-				pastPoints.shift();
+			if (_pastPoints.length > _followers.length * 5)
+				_pastPoints.shift();
 		}
 		
 	}

@@ -1,5 +1,6 @@
 ﻿package dee.moly.gameobjects.items 
 {	
+	import content.Content;
 	import dee.moly.gameobjects.GameSprite;
 	import flash.display.BitmapData;
 	import flash.display.BlendMode;
@@ -12,13 +13,11 @@
 	
 	public final class Coin extends GameSprite
 	{	
-		[Embed(source = '/Content/coin.png')]
-		public static const CoinTexture:Class;
-		public static const coinTexture:BitmapData = new CoinTexture().bitmapData;
+		private static const _coinTexture:BitmapData = Content.createTexture(Content.CoinTexture);
 		
 		public function Coin(x:int, y:int) 
 		{	
-			super(coinTexture, x, y);
+			super(_coinTexture, x, y);
 			blendMode = BlendMode.MULTIPLY;
 		}
 		

@@ -1,5 +1,6 @@
 ﻿package dee.moly.gameobjects.items
 {
+	import content.Content;
 	import dee.moly.gameobjects.GameSprite;
 	import flash.display.BitmapData;
 	import flash.display.BlendMode;
@@ -12,13 +13,11 @@
 	
 	public final class Star extends GameSprite
 	{	
-		[Embed(source = '/Content/star.png')]
-		public static const StarTexture:Class;
-		public static const starTexture:BitmapData = new StarTexture().bitmapData;
+		private static const _starTexture:BitmapData = Content.createTexture(Content.StarTexture);
 		
 		public function Star(x:int, y:int) 
 		{	
-			super(starTexture, x, y);
+			super(_starTexture, x, y);
 			blendMode = BlendMode.MULTIPLY;
 		}
 		

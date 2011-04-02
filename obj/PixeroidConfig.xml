@@ -26,7 +26,7 @@
     <path-element>C:\Users\Ishmael\Documents\FlashDevelop\Pixeroid\src\Preloader.as</path-element>
   </file-specs>
   <default-background-color>#FFFFFF</default-background-color>
-  <default-frame-rate>24</default-frame-rate>
+  <default-frame-rate>40</default-frame-rate>
   <default-size>
     <width>650</width>
     <height>650</height>

@@ -35,7 +35,7 @@
 			
 			Key.initialise(stage);
 			
-			currentState = new Level2();
+			currentState = new Level1();
 			currentState.init();
 			
 			canvas = new BitmapData(SCREEN_WIDTH, SCREEN_HEIGHT, false, 0xFFFFFF);

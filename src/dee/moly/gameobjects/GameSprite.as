@@ -51,7 +51,7 @@ package dee.moly.gameobjects
 		
 		protected var _matrix:Matrix;
 		
-		protected var collisionTestPoints:Vector.<Point>;
+		protected var _collisionTestPoints:Vector.<Point>;
 				
 		public function GameSprite(texture:BitmapData, x:int = 0, y:int = 0) 
 		{

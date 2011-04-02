@@ -12,23 +12,23 @@
 	{	
 		private static const SPEED:int = 5;
 		
-		private var wayPoints:Vector.<Point>;
+		private var _wayPoints:Vector.<Point>;
 		
-		private var currentPointIndex:int;
+		private var _currentPointIndex:int;
 		
-		private var velocity:Point;
+		private var _velocity:Point;
 		
 		public function WaypointEnemy(wayPoints:Vector.<Point>, startPointIndex:int, numFollowers:int)
 		{	
 			super(numFollowers);
 			
-			this.wayPoints = wayPoints;
+			this._wayPoints = wayPoints;
 			
-			velocity = new Point();
+			_velocity = new Point();
 			
-			currentPointIndex = startPointIndex;
+			_currentPointIndex = startPointIndex;
 			
-			_position = wayPoints[currentPointIndex];
+			_position = wayPoints[_currentPointIndex];
 			
 			nextWayPoint();	
 		}
@@ -37,22 +37,22 @@
 		{	
 			super.update(dtSeconds);
 			
-			_position = _position.add(velocity);
+			_position = _position.add(_velocity);
 			
-			if (Math.pow(wayPoints[currentPointIndex].x - _position.x, 2) + Math.pow(wayPoints[currentPointIndex].y - _position.y, 2) < 10)
+			if (Math.pow(_wayPoints[_currentPointIndex].x - _position.x, 2) + Math.pow(_wayPoints[_currentPointIndex].y - _position.y, 2) < 10)
 				nextWayPoint();
 		}
 		
 		private function nextWayPoint():void 
 		{	
-			if (++currentPointIndex >= wayPoints.length)
+			if (++_currentPointIndex >= _wayPoints.length)
 			{
-				currentPointIndex = 0;
+				_currentPointIndex = 0;
 			}
 			
-			var dist:int = Math.sqrt(Math.pow(wayPoints[currentPointIndex].x - _position.x, 2) + Math.pow(wayPoints[currentPointIndex].y - _position.y, 2));
-			velocity.x = ((wayPoints[currentPointIndex].x - _position.x) / dist) * SPEED;
-			velocity.y = ((wayPoints[currentPointIndex].y - _position.y) / dist) * SPEED;
+			var dist:int = Math.sqrt(Math.pow(_wayPoints[_currentPointIndex].x - _position.x, 2) + Math.pow(_wayPoints[_currentPointIndex].y - _position.y, 2));
+			_velocity.x = ((_wayPoints[_currentPointIndex].x - _position.x) / dist) * SPEED;
+			_velocity.y = ((_wayPoints[_currentPointIndex].y - _position.y) / dist) * SPEED;
 		}
 		
 	}
