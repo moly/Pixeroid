@@ -1,10 +1,10 @@
 ﻿package {
 	
 	import adobe.utils.CustomActions;
-	import dee.moly.gamestates.GameState;
-	import dee.moly.gamestates.levels.Level1;
-	import dee.moly.gamestates.levels.Level2
-	import dee.moly.utils.Key;
+	import dee.moly.framework.Game;
+	import dee.moly.framework.states.GameState;
+	import dee.moly.pixeroid.gamestates.levels.Level1;
+	import dee.moly.pixeroid.gamestates.levels.Level2;
 	import flash.display.Bitmap;
 	import flash.display.BitmapData;
 	import flash.display.Sprite;
@@ -15,7 +15,7 @@
 	 * @author moly
 	 */
 		
-	public class Main extends Sprite {	
+	public class Main extends Game {	
 		
 		public static const SCREEN_WIDTH:int = 650;
 		public static const SCREEN_HEIGHT:int = 650;
@@ -25,17 +25,14 @@
 		private var currentState:GameState;
 		
 		public function Main() {
-			if (stage) init();
-			else addEventListener(Event.ADDED_TO_STAGE, init);
+		
 		}
 		
-		private function init(e:Event = null):void {
-			removeEventListener(Event.ADDED_TO_STAGE, init);
-			// entry point
+		override protected function init(e:Event = null):void 
+		{
+			super.init(e);
 			
-			Key.initialise(stage);
-			
-			currentState = new Level1();
+			currentState = new Level2();
 			currentState.init();
 			
 			canvas = new BitmapData(SCREEN_WIDTH, SCREEN_HEIGHT, false, 0xFFFFFF);
