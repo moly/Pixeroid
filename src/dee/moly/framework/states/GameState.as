@@ -2,6 +2,7 @@
 {	
 	import dee.moly.framework.GameGroup;
 	import dee.moly.framework.GameObject;
+	import dee.moly.framework.graphics.Canvas;
 	import flash.display.BitmapData;
 	
 	/**
@@ -39,7 +40,7 @@
 			_gameObjects.update(dtSeconds);
 		}
 		
-		public function draw(canvas:BitmapData):void
+		public function draw(canvas:Canvas):void
 		{
 			_gameObjects.draw(canvas);
 		}

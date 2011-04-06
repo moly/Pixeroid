@@ -1,6 +1,7 @@
 ﻿package dee.moly.pixeroid.gamestates.levels 
 {	
 	import content.Content;
+	import dee.moly.pixeroid.gamestates.Level;
 	import dee.moly.pixeroid.gameobjects.Background;
 	import dee.moly.framework.GameObject;
 	import dee.moly.pixeroid.gameobjects.items.RotatingParallaxWall;
@@ -18,9 +19,9 @@
 	 * @author moly
 	 */
 	
-	public final class Level1 extends LevelState
+	public final class Level1 extends Level
 	{	
-		private static const START_POINT:Point = new Point(10, 850);
+		private static const START_POINT:Point = new Point(400, 850);
 		private static const END_POINT:Point = new Point(450, 600);
 		
 		private var _whiteWalls:ParallaxWall;
@@ -63,6 +64,8 @@
 			
 			_ship = new Ship(START_POINT.x, START_POINT.y, _levelWidth, _levelHeight);
 			add(_ship);
+			
+			_followSprite = _ship;
 			
 			_star = new Star(END_POINT.x, END_POINT.y);
 			add(_star);

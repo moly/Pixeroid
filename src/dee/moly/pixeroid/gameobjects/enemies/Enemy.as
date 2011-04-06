@@ -2,6 +2,7 @@
 {	
 	import content.Content;
 	import dee.moly.framework.GameSprite;
+	import dee.moly.framework.graphics.Canvas;
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
@@ -39,7 +40,7 @@
 			_pastPoints.push(_position);
 		}
 		
-		override public function draw(canvas:BitmapData, cameraPosition:Point = null):void 
+		override public function draw(canvas:Canvas, cameraPosition:Point = null):void 
 		{	
 			super.draw(canvas, cameraPosition.subtract(new Point( -_texture.width / 2, -_texture.height / 2)));
 			

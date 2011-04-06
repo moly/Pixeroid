@@ -1,5 +1,5 @@
-﻿package dee.moly.framework.graphics {
-	
+﻿package dee.moly.framework.graphics 
+{	
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	import flash.geom.Rectangle;
@@ -9,8 +9,8 @@
 	 * @author moly
 	 */
 	
-	public final class Animation extends BitmapData{
-		
+	public final class Animation extends BitmapData
+	{	
 		private var sheet:BitmapData;
 		
 		private var _currentFrame:int;
@@ -35,8 +35,8 @@
 		
 		private static const origin:Point = new Point();
 		
-		public function Animation(rows:int, columns:int, numFrames:int, sheet:BitmapData, repeat:Boolean = false) {
-			
+		public function Animation(rows:int, columns:int, numFrames:int, sheet:BitmapData, repeat:Boolean = false) 
+		{	
 			this.sheet = sheet;
 			this._numFrames = numFrames;
 			this.repeat = repeat;
@@ -49,33 +49,36 @@
 			super(frameWidth, frameHeight);
 			
 			copyPixels(sheet, copyRect, origin, null, null, true);
-			copyRect.x += frameWidth;
-			
+			copyRect.x += frameWidth;	
 		}
 		
-		public function update(dtSeconds:int):void {
-			
+		public function update(dtSeconds:int):void
+		{	
 			if (done == true)
 				return;
 			
 			fillRect(rect, 0x00FFFFFF);
 			copyPixels(sheet, copyRect, origin, null, null, true);
 			
-			if ((copyRect.x += frameWidth) >= sheet.width){
+			if ((copyRect.x += frameWidth) >= sheet.width)
+			{
 				copyRect.x = 0;
 				copyRect.y += frameHeight;
 			}
 			
-			if (++_currentFrame >= _numFrames) {
-				if (repeat == false) {
+			if (++_currentFrame >= _numFrames) 
+			{
+				if (repeat == false) 
+				{
 					done = true;
-				}else{
+				}
+				else
+				{
 					copyRect.x = 0;
 					copyRect.y = 0;
 					_currentFrame = 0;
 				}
 			}
-			
 		}
 		
 	}

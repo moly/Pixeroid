@@ -1,5 +1,6 @@
 package dee.moly.framework
 {
+	import dee.moly.framework.graphics.Canvas;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
 	import flash.display.BitmapData;
@@ -44,12 +45,12 @@ package dee.moly.framework
 			return _rotation;
 		}
 		
+		protected var _origin:Point;
+		
 		protected var _blendMode:String;
 		public function set blendMode(value:String):void {
 			_blendMode = value;
 		}
-		
-		protected var _matrix:Matrix;
 		
 		protected var _collisionTestPoints:Vector.<Point>;
 				
@@ -57,26 +58,14 @@ package dee.moly.framework
 		{
 			_texture = texture;
 			_position = new Point(x, y);
-			_matrix = new Matrix();
 			_rotation = 0;
+			_origin = new Point();
 			_blendMode = BlendMode.NORMAL;
 		}
 		
-		override public function draw(canvas:BitmapData, cameraPosition:Point = null):void 
+		override public function draw(canvas:Canvas, cameraPosition:Point = null):void 
 		{
-			if (_blendMode == BlendMode.NORMAL)
-			{
-				canvas.copyPixels(_texture, _texture.rect, _position.subtract(cameraPosition), null, null, true);
-			}
-			else
-			{
-				_matrix.identity();
-				_matrix.translate( -width / 2, -height / 2);
-				_matrix.rotate(rotation);
-				_matrix.translate(width / 2, height / 2);
-				_matrix.translate(_position.x - cameraPosition.x, _position.y - cameraPosition.y)
-				canvas.draw(_texture, _matrix, null, _blendMode);
-			}
+			canvas.draw(_texture, _position.subtract(cameraPosition), _blendMode, _rotation, _origin);
 		}
 		
 		public function checkCollision(gameObject:GameSprite, alphaThreshold:uint):Boolean 

@@ -1,6 +1,7 @@
 ﻿package dee.moly.framework
 {
 	
+	import dee.moly.framework.graphics.Canvas;
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
@@ -24,7 +25,7 @@
 			
 		}
 		
-		public function draw(canvas:BitmapData, cameraPosition:Point = null):void 
+		public function draw(canvas:Canvas, cameraPosition:Point = null):void 
 		{
 			
 		}

@@ -1,9 +1,8 @@
-﻿package dee.moly.pixeroid.gamestates.levels
+﻿package dee.moly.framework.states
 {	
+	import dee.moly.framework.GameSprite;
+	import dee.moly.framework.graphics.Canvas;
 	import dee.moly.framework.states.GameState;
-	import dee.moly.pixeroid.gameobjects.Ship;
-	import dee.moly.pixeroid.gameobjects.items.Star;
-	import dee.moly.pixeroid.gameobjects.Background;
 	import dee.moly.framework.utils.MathExtension;
 	import flash.display.BitmapData;
 	import flash.geom.Point;
@@ -14,42 +13,35 @@
 	 */
 	
 	public class LevelState extends GameState
-	{
-		protected var _ship:Ship;
-		
-		protected var _star:Star;
-		
-		protected var _border:Background;
-		
-		protected var _cameraPosition:Point;
-		
+	{		
 		protected var _levelWidth:int;
 		protected var _levelHeight:int;
 		
+		protected var _cameraPosition:Point;
+		protected var _followSprite:GameSprite;
+		
 		public function LevelState()
 		{	
-			
-		}
-		
-		override public function init():void 
-		{
-			super.init();
-			_cameraPosition = new Point();	
+			_cameraPosition = new Point();
 		}
 		
 		override public function update(dtSeconds:int):void 
 		{	
 			super.update(dtSeconds);
+			
 			scrollCamera();	
 		}
 		
-		override public function draw(canvas:BitmapData):void 
+		override public function draw(canvas:Canvas):void 
 		{
 			_gameObjects.draw(canvas, _cameraPosition);
 		}
 		
 		protected function scrollCamera():void
 		{	
+			if (!_followSprite)
+				return;
+			
 			const horizontalViewMargin:Number = 0.5;
 			const verticalViewMargin:Number = 0.5;
 			
@@ -62,18 +54,18 @@
 			var marginBottom:Number = _cameraPosition.y + Main.SCREEN_HEIGHT - marginHeight;
 			
 			var cameraMovement:Point = new Point();
-			if(_ship.x < marginLeft)
-				cameraMovement.x = _ship.x - marginLeft;
-			else if(_ship.x > marginRight)
-				cameraMovement.x = _ship.x - marginRight;
+			if(_followSprite.x < marginLeft)
+				cameraMovement.x = _followSprite.x - marginLeft;
+			else if(_followSprite.x > marginRight)
+				cameraMovement.x = _followSprite.x - marginRight;
 			
-			if(_ship.y < marginTop)
-				cameraMovement.y = _ship.y - marginTop;
-			else if(_ship.y > marginBottom)
-				cameraMovement.y = _ship.y - marginBottom;
+			if(_followSprite.y < marginTop)
+				cameraMovement.y = _followSprite.y - marginTop;
+			else if(_followSprite.y > marginBottom)
+				cameraMovement.y = _followSprite.y - marginBottom;
 				
-			var maxCameraPositionX:Number = _border.width - Main.SCREEN_WIDTH;
-			var maxCameraPositionY:Number = _border.height - Main.SCREEN_HEIGHT;
+			var maxCameraPositionX:Number = _levelWidth - Main.SCREEN_WIDTH;
+			var maxCameraPositionY:Number = _levelHeight - Main.SCREEN_HEIGHT;
 			_cameraPosition.x = MathExtension.clamp(_cameraPosition.x + cameraMovement.x, 0, maxCameraPositionX);
 			_cameraPosition.y = MathExtension.clamp(_cameraPosition.y + cameraMovement.y, 0, maxCameraPositionY);	
 		}

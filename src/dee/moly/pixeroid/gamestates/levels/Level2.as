@@ -1,5 +1,7 @@
 ﻿package dee.moly.pixeroid.gamestates.levels 
 {	
+	import dee.moly.framework.graphics.Canvas;
+	import dee.moly.pixeroid.gamestates.Level;
 	import dee.moly.pixeroid.gameobjects.Background;
 	import dee.moly.framework.GameGroup;
 	import dee.moly.framework.GameSprite;
@@ -19,7 +21,7 @@
 	 * @author moly
 	 */
 	
-	public final class Level2 extends LevelState
+	public final class Level2 extends Level
 	{	
 		private static const START_POINT:Point = new Point(0, 0);
 		private static const END_POINT:Point = new Point(430, 310);
@@ -59,6 +61,8 @@
 			
 			_ship = new Ship(START_POINT.x, START_POINT.y, _levelWidth, _levelHeight);
 			add(_ship);
+			
+			_followSprite = _ship;
 			
 			_star = new Star(END_POINT.x, END_POINT.y);
 			add(_star);
@@ -130,26 +134,6 @@
 			
 			if (_ship.checkCollision(_star, 0xDD) && _coins.count == 0)
 				changeState(Level1);
-		}
-		
-		override public function draw(canvas:BitmapData):void 
-		{	
-			super.draw(canvas);
-			
-			/*
-			_bg.draw(canvas, _cameraPosition);
-			
-			_ship.draw(canvas, _cameraPosition);
-			_star.draw(canvas, _cameraPosition);
-			
-			for each(var enemy:Enemy in _enemies)
-				enemy.draw(canvas, _cameraPosition);
-				
-			for each(var coin:Coin in _coins)
-				coin.draw(canvas, _cameraPosition);
-			
-			_border.draw(canvas, _cameraPosition);
-			*/
 		}
 		
 	}

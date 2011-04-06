@@ -20,50 +20,53 @@ package content
 			return Bitmap(new textureClass()).bitmapData;
 		}
 		
-		[Embed(source = '/content/level2/enemy.png')]
+		[Embed(source='/content/level2/enemy.png')]
 		public static const EnemyTexture:Class;
 		
-		[Embed(source = '/Content/level2/enemymini.png')]
+		[Embed(source='/content/level2/enemymini.png')]
 		public static const EnemyMiniTexture:Class;
 		
-		[Embed(source = '/Content/coin.png')]
+		[Embed(source='/content/coin.png')]
 		public static const CoinTexture:Class;
 		
-		[Embed(source = '/Content/level1/skull.png')]
+		[Embed(source='/content/level1/skull.png')]
 		public static const SkullTexture:Class;
 		
-		[Embed(source = '/Content/star.png')]
+		[Embed(source='/content/star.png')]
 		public static const StarTexture:Class;
 		
-		[Embed(source = '/Content/ship.png')]
+		[Embed(source='/content/ship.png')]
 		public static const ShipTexture:Class;
 		
-		[Embed(source = '/Content/shipSheet.png')]
+		[Embed(source='/content/shipSheet.png')]
 		public static const ShipSheet:Class;
 		
-		[Embed(source = '/Content/level1/border.png')]
+		[Embed(source='/content/level1/border.png')]
 		public static const BorderTexture:Class;
 		
-		[Embed(source='/Content/level1/bg.png')]
+		[Embed(source='/content/level1/bg.png')]
 		public static const BGTexture:Class;
 		
-		[Embed(source='/Content/level1/whiteWalls.png')]
+		[Embed(source='/content/level1/whiteWalls.png')]
 		public static const WhiteWallsTexture:Class;
 		
-		[Embed(source='/Content/level1/orangeWalls.png')]
+		[Embed(source='/content/level1/orangeWalls.png')]
 		public static const OrangeWallsTexture:Class;
 		
-		[Embed(source='/Content/level1/blueWalls.png')]
+		[Embed(source='/content/level1/blueWalls.png')]
 		public static const BlueWallsTexture:Class;
 		
-		[Embed(source='/Content/level1/whiteRotator.png')]
+		[Embed(source='/content/level1/whiteRotator.png')]
 		public static const WhiteRotatorTexture:Class;
 		
-		[Embed(source='/Content/level1/orangeRotator.png')]
+		[Embed(source='/content/level1/orangeRotator.png')]
 		public static const OrangeRotatorTexture:Class;
 		
-		[Embed(source='/Content/level1/blueRotator.png')]
+		[Embed(source='/content/level1/blueRotator.png')]
 		public static const BlueRotatorTexture:Class;
+		
+		[Embed(source = '/content/border.png')]
+		public static const BorderTex:Class;
 	}
 
 }

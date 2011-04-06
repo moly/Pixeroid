@@ -15,6 +15,7 @@
 		public function RotatingParallaxWall(texture:BitmapData, x:int, y:int, followObject:GameSprite, movement:Number) 
 		{
 			super(texture, x, y, followObject, movement);
+			_origin = new Point(texture.width / 2, texture.height / 2);
 		}
 		
 		override public function update(dtSeconds:int):void 

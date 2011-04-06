@@ -1,5 +1,6 @@
 package dee.moly.framework 
 {
+	import dee.moly.framework.graphics.Canvas;
 	import flash.display.BitmapData;
 	import flash.geom.Point;
 	
@@ -42,7 +43,7 @@ package dee.moly.framework
 		}
 		
 		// draw all members
-		override public function draw(canvas:BitmapData, cameraPosition:Point = null):void 
+		override public function draw(canvas:Canvas, cameraPosition:Point = null):void 
 		{
 			for each(var gameObject:GameObject in _members)
 				gameObject.draw(canvas, cameraPosition);
