@@ -65,7 +65,7 @@ package dee.moly.framework
 		
 		override public function draw(canvas:Canvas, cameraPosition:Point = null):void 
 		{
-			canvas.draw(_texture, _position.subtract(cameraPosition), _blendMode, _rotation, _origin);
+			canvas.draw(_texture, _texture.rect, _position.subtract(cameraPosition), _blendMode, _rotation, _origin);
 		}
 		
 		public function checkCollision(gameObject:GameSprite, alphaThreshold:uint):Boolean 

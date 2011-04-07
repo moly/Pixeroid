@@ -106,22 +106,21 @@
 		
 		override public function update(dtSeconds:int):void 
 		{	
-			//scrollCamera();
-			
-			//_ship.update(dtSeconds);
 			super.update(dtSeconds);
 			
 			for each(var enemy:Enemy in _enemies.members) 
-			{	
-				//enemy.update(dtSeconds);
-				
-				if (_ship.checkCollision(enemy, 0x22))
+			{					
+				if (_ship.checkCollision(enemy, 0x22)) {
+					
 					_ship.onCollision();
+				}
 					
 				for each(var miniEnemy:EnemyMini in enemy.miniEnemies) 
 				{
-					if (_ship.checkCollision(miniEnemy, 0x22))
+					if (_ship.checkCollision(miniEnemy, 0x22)) {
+						// TODO: 
 						_ship.onCollision();
+					}
 				}
 				
 			}

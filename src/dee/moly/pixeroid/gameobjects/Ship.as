@@ -3,10 +3,13 @@
 	import content.Content;
 	import dee.moly.framework.GameSprite;
 	import dee.moly.framework.graphics.Animation;
+	import dee.moly.framework.graphics.AnimationPlayer;
+	import dee.moly.framework.graphics.Canvas;
 	import dee.moly.framework.utils.Input;
 	import flash.display.BitmapData;
 	import flash.display.BlendMode;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	import flash.ui.Keyboard;
 	
 	/**
@@ -24,6 +27,7 @@
 		private var _isAlive:Boolean;
 		
 		private var _dieingAnimation:Animation;
+		private var _animationPlayer:AnimationPlayer;
 		
 		private var _velocity:Point;
 		
@@ -34,22 +38,31 @@
 		public function Ship(x:int, y:int, levelWidth:int, levelHeight:int)
 		{	
 			super(_shipTexture, x, y);
+			
 			blendMode = BlendMode.MULTIPLY;
+			
+			_animationPlayer = new AnimationPlayer();
+			_dieingAnimation = new Animation(_shipSheet, 72, 78, 0.02, true);
+			_animationPlayer.playAnimation(_dieingAnimation);
 			
 			_startPoint = new Point(x, y);
 			
 			_rightBounds = levelWidth;
 			_lowerBounds = levelHeight;
 			
-			reset();
+			_velocity = new Point();
 		}
 		
 		override public function update(dtSeconds:int):void 
 		{	
-			if (!_isAlive) {
-				moveBackToStart(dtSeconds);
-				return;
+			if (!_isAlive) 
+			{
+				//_dieingAnimation.update(dtSeconds);
+				//moveBackToStart(dtSeconds);
+				//return;
 			}
+			
+			_animationPlayer.update(dtSeconds);
 			
 			_velocity.y += 0.1;
 			
@@ -58,21 +71,24 @@
 			checkBounds();
 			
 			handleInput();
-			
+		}
+		
+		override public function draw(canvas:Canvas, cameraPosition:Point = null):void 
+		{
+			_animationPlayer.draw(canvas, _position.subtract(cameraPosition), _blendMode);
 		}
 		
 		override public function onCollision():void
 		{	
-			if (!_isAlive)
-				return;
+			//if (!_isAlive)
+			//	return;
 				
-			_isAlive = false;
-			_texture = _dieingAnimation;
+			//_isAlive = false;
+			_animationPlayer.playAnimation(_dieingAnimation);
 			
-			var dist:int = Math.sqrt(Math.pow(_startPoint.x - _position.x, 2) + Math.pow(_startPoint.y - _position.y, 2));
-			_velocity.x = ((_startPoint.x - _position.x) / dist) * 20;
-			_velocity.y = ((_startPoint.y - _position.y) / dist) * 20;
-			
+			//var dist:int = Math.sqrt(Math.pow(_startPoint.x - _position.x, 2) + Math.pow(_startPoint.y - _position.y, 2));
+			//_velocity.x = ((_startPoint.x - _position.x) / dist) * 20;
+			//_velocity.y = ((_startPoint.y - _position.y) / dist) * 20;			
 		}
 		
 		private function checkBounds():void 
@@ -114,26 +130,13 @@
 				_velocity.y += 0.1;
 		}
 		
-		private function reset():void 
-		{	
-			_texture = _shipTexture;
-			_dieingAnimation = new Animation(3, 5, 14, _shipSheet);
-			
-			_position = new Point(_startPoint.x, _startPoint.y);
-			_velocity = new Point(0, 0);
-			
-			_isAlive = true;
-		}
-		
 		private function moveBackToStart(dtSeconds:int):void 
-		{	
-			_dieingAnimation.update(dtSeconds);
-			
-			if (_dieingAnimation.currentFrame == _dieingAnimation.numFrames)
-				_position = _position.add(_velocity);
+		{				
+			//if (_dieingAnimation.currentFrame == _dieingAnimation.numFrames)
+				//_position = _position.add(_velocity);
 				
-			if (Math.pow(_startPoint.x - _position.x, 2) + Math.pow(_startPoint.y - _position.y, 2) < 275)
-				reset();	
+			//if (Math.pow(_startPoint.x - _position.x, 2) + Math.pow(_startPoint.y - _position.y, 2) < 275)
+				//reset();	
 		}
 		
 	}

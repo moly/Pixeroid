@@ -9,78 +9,45 @@
 	 * @author moly
 	 */
 	
-	public final class Animation extends BitmapData
-	{	
-		private var sheet:BitmapData;
-		
-		private var _currentFrame:int;
-		public function get currentFrame():int {
-			return _currentFrame;
+	public class Animation extends Graphic
+	{
+		// Duration of time to show each frame.
+		private var _frameTime:Number;
+		public function get frameTime():Number{
+			return _frameTime;
 		}
-		
-		private var _numFrames:int;
-		public function get numFrames():int {
-			return _numFrames;
+
+		private var _repeat:Boolean;
+		public function get repeat():Boolean{
+			return _repeat;
 		}
-		
-		private var frameWidth:int;
-		
-		private var frameHeight:int;
-		
-		private var copyRect:Rectangle;
-		
-		private var repeat:Boolean;
-		
-		private var done:Boolean;
-		
-		private static const origin:Point = new Point();
-		
-		public function Animation(rows:int, columns:int, numFrames:int, sheet:BitmapData, repeat:Boolean = false) 
-		{	
-			this.sheet = sheet;
-			this._numFrames = numFrames;
-			this.repeat = repeat;
-			
-			frameWidth = sheet.width / columns;
-			frameHeight = sheet.height / rows;
-			
-			copyRect = new Rectangle(0, 0, frameWidth, frameHeight);
-			
-			super(frameWidth, frameHeight);
-			
-			copyPixels(sheet, copyRect, origin, null, null, true);
-			copyRect.x += frameWidth;	
+
+		public function get frameCount():int{
+			return texture.width / frameWidth;
 		}
-		
-		public function update(dtSeconds:int):void
-		{	
-			if (done == true)
-				return;
-			
-			fillRect(rect, 0x00FFFFFF);
-			copyPixels(sheet, copyRect, origin, null, null, true);
-			
-			if ((copyRect.x += frameWidth) >= sheet.width)
-			{
-				copyRect.x = 0;
-				copyRect.y += frameHeight;
-			}
-			
-			if (++_currentFrame >= _numFrames) 
-			{
-				if (repeat == false) 
-				{
-					done = true;
-				}
-				else
-				{
-					copyRect.x = 0;
-					copyRect.y = 0;
-					_currentFrame = 0;
-				}
-			}
+
+		private var _frameWidth:int;
+		public function get frameWidth():int{
+			return _frameWidth;
 		}
-		
+
+		private var _frameHeight:int;
+		public function get frameHeight():int{
+			return _frameHeight;
+		}
+
+		// Constructs a new animation.
+		public function Animation(texture:BitmapData, frameWidth:int, frameHeight:int, frameTime:Number, repeat:Boolean):void
+		{
+			super(texture);
+			
+			_frameWidth = frameWidth;
+			_frameHeight = frameHeight;
+			_frameTime = frameTime;
+			_repeat = repeat;
+			// TODO: Add support for multirow spread sheets
+		}
+
 	}
 
 }

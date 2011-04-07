@@ -6,6 +6,7 @@ package dee.moly.framework.graphics
 	import flash.display.Stage;
 	import flash.geom.Matrix;
 	import flash.geom.Point;
+	import flash.geom.Rectangle;
 	
 	/**
 	 * ...
@@ -38,11 +39,11 @@ package dee.moly.framework.graphics
 			_bitmapData.unlock();
 		}
 		
-		public function draw(texture:BitmapData, position:Point, blendMode:String = BlendMode.NORMAL, rotation:Number = 0, origin:Point = null):void
+		public function draw(texture:BitmapData, sourceRect:Rectangle, position:Point, blendMode:String = BlendMode.NORMAL, rotation:Number = 0, origin:Point = null):void
 		{			
 			if (blendMode == BlendMode.NORMAL && rotation == 0)
 			{
-				_bitmapData.copyPixels(texture, texture.rect, position, null, null, true);
+				_bitmapData.copyPixels(texture, sourceRect, position, null, null, true);
 			}
 			else
 			{
@@ -53,9 +54,10 @@ package dee.moly.framework.graphics
 				_matrix.translate(-origin.x, -origin.y);
 				_matrix.rotate(rotation);
 				_matrix.translate(origin.x, origin.y);
-				_matrix.translate(position.x, position.y)
+				_matrix.translate(position.x - sourceRect.x, position.y - sourceRect.y);
 				
-				_bitmapData.draw(texture, _matrix, null, blendMode);
+				var rect:Rectangle = new Rectangle(position.x, position.y, sourceRect.width, sourceRect.height);
+				_bitmapData.draw(texture, _matrix, null, blendMode, rect);
 			}
 		}
 		
